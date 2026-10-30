@@ -8,14 +8,14 @@
 Hardware/
   dobot_api.py              # Dobot TCP/IP API
   feedback_monitor.py       # 30004 实时反馈线程
-导纳拖动/
+AdmittanceDrag/
   AdmittanceController/
     admittance_controller.py
   Filters/
     Filters.py
   Demo/
     AdmittanceForceDrive.py
-Dobot二次开发快速指南.md
+Dobot_TCPIP_Quick_Start.md
 ```
 
 ## 环境
@@ -30,10 +30,10 @@ py -m pip install -r requirements.txt
 
 ## 运行
 
-先在 `导纳拖动/Demo/AdmittanceForceDrive.py` 中确认机器人 IP 和导纳参数，然后运行：
+先在 `AdmittanceDrag/Demo/AdmittanceForceDrive.py` 中确认机器人 IP 和导纳参数，然后运行：
 
 ```powershell
-py .\导纳拖动\Demo\AdmittanceForceDrive.py
+py .\AdmittanceDrag\Demo\AdmittanceForceDrive.py
 ```
 
 程序连接：
