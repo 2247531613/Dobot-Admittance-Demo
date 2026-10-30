@@ -117,14 +117,22 @@ def main():
         controller.reset()
 
         print("导纳拖动已启动，按 Ctrl+C 停止")
-        previous_time = time.monotonic()
-        next_time = previous_time
+        previous_time = None
+        next_time = time.monotonic()
 
         while True:
             monitor.raise_if_failed()
             now = time.monotonic()
-            dt = now - previous_time
+            # Windows 的单调时钟在连续两次读取时可能返回相同值。
+            # 首周期直接使用目标周期，避免把 dt=0 传给导纳控制器。
+            dt = (
+                CONTROL_PERIOD_S
+                if previous_time is None
+                else now - previous_time
+            )
             previous_time = now
+            if dt <= 0.0:
+                continue
 
             state = monitor.get_latest()
             if state is None or now - state["recv_time"] > FEEDBACK_TIMEOUT_S:
